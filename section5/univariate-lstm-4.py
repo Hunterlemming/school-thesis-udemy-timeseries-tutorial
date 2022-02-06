@@ -49,13 +49,13 @@ def train_new_model():
 
     # Adding a new layer
     _model.add(LSTM(                
-        units=60,                           # Number of neurons in this layer
-        return_sequences=True,              # Whether to return the last output sequence or the full sequence
+        units=60,                           # Number of neurons in this layer (hyperparameter, adjustable)
+        return_sequences=True,              # Whether to return the last output or the full sequence (True till the last)
         input_shape=(x_train.shape[1], 1)   # The shape and dimension (features) of the input, used at weight creation
         ))
 
     # Avoiding overfitting
-    _model.add(Dropout(0.2))                # Drop 20% of the neurons
+    _model.add(Dropout(0.2))                # Drop 20% of the neurons (hyperparameter, adjustable)
 
 
     # Adding more layers
@@ -76,7 +76,7 @@ def train_new_model():
     _model.compile(optimizer='adam', loss='mean_squared_error')     # Choosing optimizer and the way loss is calculated
 
     # Fitting model
-    _model.fit(x_train, y_train, epochs=15, batch_size=32)
+    _model.fit(x_train, y_train, epochs=15, batch_size=32)          # epochs and batch_size are hyperparameters (adjustable)
 
     # Saving model
     _model.save(MODEL_LOCATION)
